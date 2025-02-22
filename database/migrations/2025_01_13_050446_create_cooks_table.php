@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string("gallary_images")->nullable();
             $table->boolean('status')->default(1);
             $table->unsignedBigInteger('cook_parent_id')->nullable();
+            $table->unsignedBigInteger('category_id');
+            $table->integer("cook_time");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

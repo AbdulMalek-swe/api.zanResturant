@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\ChefController;
 use App\Http\Controllers\Admin\CookController;
+use App\Http\Controllers\Admin\VariantController;
 use App\Http\Controllers\User\CategoryUserController;
 use App\Http\Controllers\User\ChefUserController;
 use App\Http\Controllers\User\CookUserController;
@@ -31,6 +32,14 @@ Route::resource("admin/chef", ChefController::class)->only([
 ]);
 // category 
 Route::resource("admin/category", CategoryController::class)->only([
+    'index',
+    'show',
+    'store',
+    'update',
+    'destroy',
+]);
+// variant 
+Route::resource("admin/variant", VariantController::class)->only([
     'index',
     'show',
     'store',

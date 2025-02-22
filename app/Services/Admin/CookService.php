@@ -38,7 +38,9 @@ class CookService
             'about_cook' => $request->about_cook,
             'cook_image' => $request->cook_image ? self::ImageUpload($request->cook_image) : '',
             'status' => $request->status,
-            'discount_price' => $request->discount_price
+            'discount_price' => $request->discount_price,
+            'category_id' => $request->category_id,
+            'cook_time'=>$request->cook_time
         ]);
     }
     // store Cook

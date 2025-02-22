@@ -15,4 +15,7 @@ class Category extends Model
         'parent_id',
         'status',
     ];
+    public function cooks(){
+        return $this->hasMany(Cook::class, 'category_id');
+    }
 }

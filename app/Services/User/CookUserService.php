@@ -11,7 +11,7 @@ class CookUserService
     {
         try {
             $per_page = request('per_page');
-            return Cook::latest()->paginate($per_page??15)->where("status",1);
+           return Cook::where('status', 1)->latest()->paginate($per_page ?? 15);
         } catch (\Throwable $th) {
             return HttpResponseHelper::errorResponse([$th->getMessage()], 500);
         }
@@ -21,7 +21,7 @@ class CookUserService
     public static function show($id)
     {
         try {
-            return Cook::findOrFail($id);
+            return Cook::with(['childs','variants'])->find($id);
         } catch (\Throwable $th) {
             return HttpResponseHelper::errorResponse([$th->getMessage()], 500);
         }

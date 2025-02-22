@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Services\User;
+
 use App\Helpers\HttpResponseHelper;
 use App\Models\Category;
 
@@ -21,11 +22,9 @@ class CategoryUserService
     public static function showCategory($id)
     {
         try {
-            return Category::findOrFail($id);
+            return Category::with(['cooks'])->findOrFail($id);
         } catch (\Throwable $th) {
             return HttpResponseHelper::errorResponse([$th->getMessage()], 500);
         }
     }
-    
-    
 }
