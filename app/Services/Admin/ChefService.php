@@ -33,7 +33,9 @@ class ChefService
     {
         // 'meta_robots',
         return ([
+            'chef_name'=>$request->chef_name,
             'title' => $request->title,
+            'description' => $request->description,
             'chef_image' => $request->chef_image ? self::ImageUpload($request->chef_image) : '',
         ]);
     }

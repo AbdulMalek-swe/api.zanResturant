@@ -68,7 +68,7 @@ class CookService
     public static function show($id)
     {
         try {
-            return Cook::findOrFail($id);
+            return Cook::with("category_name")->findOrFail($id);
         } catch (\Throwable $th) {
             return HttpResponseHelper::errorResponse([$th->getMessage()], 500);
         }

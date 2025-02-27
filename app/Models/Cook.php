@@ -27,6 +27,10 @@ class Cook extends Model
     {
         return $this->belongsTo(Category::class, 'category_id', 'cook_id');
     }
+    public function category_name()
+    {
+        return $this->belongsTo(Category::class, 'category_id' );
+    }
     public function variants(){
         return $this->hasMany(Variation::class, 'cook_id', 'cook_id');
     }

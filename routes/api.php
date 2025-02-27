@@ -4,10 +4,12 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\ChefController;
 use App\Http\Controllers\Admin\CookController;
+use App\Http\Controllers\Admin\ReviewAdminController;
 use App\Http\Controllers\Admin\VariantController;
 use App\Http\Controllers\User\CategoryUserController;
 use App\Http\Controllers\User\ChefUserController;
 use App\Http\Controllers\User\CookUserController;
+use App\Http\Controllers\User\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -46,6 +48,14 @@ Route::resource("admin/variant", VariantController::class)->only([
     'update',
     'destroy',
 ]);
+// review controller
+Route::resource("admin/review", ReviewAdminController::class)->only([
+    'index', 
+    'destroy',
+]);
+
+
+
 // category 
 Route::resource("category", CategoryUserController::class)->only([
     'index',
@@ -60,4 +70,10 @@ Route::resource("chef", ChefUserController::class)->only([
 Route::resource("cook", CookUserController::class)->only([
     'index',
     'show'
+]);
+
+// review api 
+Route::resource("review", ReviewController::class)->only([
+    'index', 
+    'store', 
 ]);
