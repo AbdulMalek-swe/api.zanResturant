@@ -6,7 +6,7 @@ use App\Helpers\HttpResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CookRequest;
 use App\Services\Admin\CookService;
-
+use Illuminate\Http\Request;
 
 class CookController extends Controller
 {
@@ -39,4 +39,10 @@ class CookController extends Controller
     CookService::destroy($id);
     return  HttpResponseHelper::successResponse("Delete Cook successfully", null, 200);
   }
+  // popular cook set
+  public function popular(Request $request)
+  {
+    CookService::popular($request);
+    return  HttpResponseHelper::successResponse("popular  Cook  list show successfully", null, 200);
+  }  
 }

@@ -2,7 +2,8 @@
 
 namespace App\Services\User;
 use App\Helpers\HttpResponseHelper; 
-use App\Models\Cook; 
+use App\Models\Cook;
+use App\Models\Popular;
 
 class CookUserService
 {
@@ -22,6 +23,23 @@ class CookUserService
     {
         try {
             return Cook::with(['childs','variants'])->find($id);
+        } catch (\Throwable $th) {
+            return HttpResponseHelper::errorResponse([$th->getMessage()], 500);
+        }
+    }
+    
+    //    show single Cook 
+    public static function popular()
+    {
+        try { 
+            
+            $popularCookIds = Popular::get()->first()->popular_cook_ids;
+            $cookIds= json_decode($popularCookIds);
+            if (empty($cookIds)) {
+              return HttpResponseHelper::errorResponse( ["can not find popular food id"], 500);  
+            }
+           $popularCook =  Cook::with(['childs','variants'])->whereIn('cook_id',$cookIds)->get();
+           return $popularCook ;
         } catch (\Throwable $th) {
             return HttpResponseHelper::errorResponse([$th->getMessage()], 500);
         }

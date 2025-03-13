@@ -5,6 +5,7 @@ namespace App\Services\Admin;
 use App\Helpers\HttpResponseHelper;
 use App\Helpers\ImageHelpers;
 use App\Models\Cook;
+use App\Models\Popular;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 
@@ -94,6 +95,24 @@ class CookService
                 File::delete($Cook->image);
             }
             return   $Cook->delete();;
+        } catch (\Throwable $th) {
+            return HttpResponseHelper::errorResponse([$th->getMessage()], 500);
+        }
+    }
+    //    create popular cook
+    public static function popular($request)
+    {
+        try {  
+            if($request->type=='delete'){
+                $dltId = $request->id;
+                $popularCookIds = Popular::get()->first()->popular_cook_ids;
+                $cookIds= json_decode($popularCookIds);
+                $updatedCookIds = array_values(array_diff($cookIds, [$dltId]));
+                Popular::create(['popular_cook_ids'=>  $updatedCookIds]);
+                return "Delete successfully popular cook";
+            }
+            return Popular::create(['popular_cook_ids'=>$request->popular_cook_ids]);
+           
         } catch (\Throwable $th) {
             return HttpResponseHelper::errorResponse([$th->getMessage()], 500);
         }

@@ -17,5 +17,11 @@ use App\Services\User\CookUserService;
         $Cook = CookUserService::show($id);
       return   HttpResponseHelper::successResponse("successfully fetch single Cook",$Cook,200);
     }
+ 
+    // single Cook 
+    public function popular(){ 
+        $Cook = CookUserService::popular();
+      return   HttpResponseHelper::successResponse("successfully fetch single Cook",$Cook,200);
+    }
      
   }
